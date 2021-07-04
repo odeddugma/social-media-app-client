@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Link from "react-router-dom/Link";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // MUI stuff
@@ -10,6 +11,14 @@ import Typography from "@material-ui/core/Typography";
 const styles = {
 	card: {
 		display: "flex",
+		marginBottom: 20,
+	},
+	image: {
+		minWidth: 200,
+	},
+	content: {
+		padding: 25,
+		objectFit: "cover",
 	},
 };
 
@@ -29,10 +38,20 @@ class Post extends Component {
 		} = this.props;
 
 		return (
-			<Card>
-				<CardMedia image={userImage} title="Profile Image" />
-				<CardContent>
-					<Typography variant="h5">{userHandle}</Typography>
+			<Card className={classes.card}>
+				<CardMedia
+					image={userImage}
+					title="Profile Image"
+					className={classes.image}
+				/>
+				<CardContent class={classes.content}>
+					<Typography
+						variant="h5"
+						component={Link}
+						to={`/users/${userHandle}`}
+						color="primary">
+						{userHandle}
+					</Typography>
 					<Typography variant="body2" color="textSecondary">
 						{createdAt}
 					</Typography>
