@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Link from "react-router-dom/Link";
+import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // MUI stuff
@@ -44,7 +44,7 @@ class Post extends Component {
 					title="Profile Image"
 					className={classes.image}
 				/>
-				<CardContent class={classes.content}>
+				<CardContent className={classes.content}>
 					<Typography
 						variant="h5"
 						component={Link}
