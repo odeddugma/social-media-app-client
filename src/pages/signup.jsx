@@ -47,8 +47,8 @@ class signup extends Component {
 		this.state = {
 			email: "",
 			password: "",
-      confirmPassword:'',
-      handle: '',
+			confirmPassword: "",
+			handle: "",
 			loading: false,
 			errors: {},
 		};
@@ -61,8 +61,8 @@ class signup extends Component {
 		const newUserData = {
 			email: this.state.email,
 			password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
-      handle: this.state.handle,
+			confirmPassword: this.state.confirmPassword,
+			handle: this.state.handle,
 		};
 
 		axios
@@ -71,7 +71,7 @@ class signup extends Component {
 				this.setState({
 					loading: false,
 				});
-        localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
+				localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
 				this.props.history.push("/");
 				console.log(res.data);
 			})
@@ -103,7 +103,8 @@ class signup extends Component {
 							display: "flex",
 							justifyContent: "space-evenly",
 							margin: "20px auto",
-						}}>
+						}}
+					>
 						<img src={AppIcon} alt="App Icon" className={classes.AppIcon} />
 						<Typography variant="h2" className={classes.pageTitle}>
 							Signup
@@ -168,7 +169,8 @@ class signup extends Component {
 							variant="contained"
 							color="primary"
 							className={classes.button}
-							disabled={loading}>
+							disabled={loading}
+						>
 							Signup
 							{loading && (
 								<CircularProgress
@@ -180,7 +182,11 @@ class signup extends Component {
 						</Button>
 						<br />
 						<small>
-							Already have an account? <Link to="/login"><u>Login</u></Link> here.
+							Already have an account?{" "}
+							<Link to="/login">
+								<u>Login</u>
+							</Link>{" "}
+							here.
 						</small>
 					</form>
 				</Grid>

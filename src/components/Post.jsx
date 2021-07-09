@@ -52,7 +52,8 @@ class Post extends Component {
 						variant="h5"
 						component={Link}
 						to={`/users/${userHandle}`}
-						color="primary">
+						color="primary"
+					>
 						{userHandle}
 					</Typography>
 					<Typography variant="body2" color="textSecondary">

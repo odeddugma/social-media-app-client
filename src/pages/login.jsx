@@ -67,7 +67,7 @@ class login extends Component {
 				this.setState({
 					loading: false,
 				});
-				localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
+				localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
 				this.props.history.push("/");
 				console.log(res.data);
 			})
@@ -99,7 +99,8 @@ class login extends Component {
 							display: "flex",
 							justifyContent: "space-evenly",
 							margin: "20px auto",
-						}}>
+						}}
+					>
 						<img src={AppIcon} alt="App Icon" className={classes.AppIcon} />
 						<Typography variant="h2" className={classes.pageTitle}>
 							Login
@@ -140,7 +141,8 @@ class login extends Component {
 							variant="contained"
 							color="primary"
 							className={classes.button}
-							disabled={loading}>
+							disabled={loading}
+						>
 							Login
 							{loading && (
 								<CircularProgress
