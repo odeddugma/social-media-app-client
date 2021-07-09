@@ -67,6 +67,7 @@ class login extends Component {
 				this.setState({
 					loading: false,
 				});
+				localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
 				this.props.history.push("/");
 				console.log(res.data);
 			})
@@ -84,7 +85,7 @@ class login extends Component {
 		});
 	};
 
-	state = {};
+	//state = {};
 	render() {
 		const { classes } = this.props;
 		const { errors, loading } = this.state;
