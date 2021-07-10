@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import jwtDecode from "jwt-decode";
 
-/* Redux */
+/* Redux stuff */
 import { Provider } from "react-redux";
 import store from "./redux/strore";
 
