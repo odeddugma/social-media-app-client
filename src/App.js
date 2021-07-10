@@ -2,10 +2,17 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import jwtDecode from "jwt-decode";
+
+/* Redux */
+import { Provider } from "react-redux";
+import store from "./redux/strore";
+
+/* MUI stuff */
 //import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import themeFile from "./util/theme";
+
 /* Components */
 import Navbar from "./components/Navbar.jsx";
 import AuthRoute from "./util/AuthRoute.jsx";
@@ -30,24 +37,34 @@ const token = localStorage.FBIdToken;
 } */
 
 class App extends Component {
-  render() {
-    return (
-      <MuiThemeProvider theme={theme}>
-        <div className="App">
-          <Router>
-            <Navbar />
-            <div className="container">
-              <Switch>
-                <Route exact path="/" component={home} />
-                <AuthRoute path="/login" component={login} authenticated={authenticated} />
-                <AuthRoute path="/signup" component={signup} authenticated={authenticated} />
-              </Switch>
-            </div>
-          </Router>
-        </div>
-      </MuiThemeProvider>
-    );
-  }
+	render() {
+		return (
+			<Provider store={store}>
+				<MuiThemeProvider theme={theme}>
+					<div className="App">
+						<Router>
+							<Navbar />
+							<div className="container">
+								<Switch>
+									<Route exact path="/" component={home} />
+									<AuthRoute
+										path="/login"
+										component={login}
+										authenticated={authenticated}
+									/>
+									<AuthRoute
+										path="/signup"
+										component={signup}
+										authenticated={authenticated}
+									/>
+								</Switch>
+							</div>
+						</Router>
+					</div>
+				</MuiThemeProvider>
+			</Provider>
+		);
+	}
 }
 
 export default App;
