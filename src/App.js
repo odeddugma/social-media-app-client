@@ -18,7 +18,7 @@ const theme = createMuiTheme(themeFile);
 
 let authenticated;
 const token = localStorage.FBIdToken;
-if (token) {
+/* if (token) {
   const decodedToken = jwtDecode(token);
   console.log(decodedToken);
   if (decodedToken.exp * 1000 < Date.now()) {
@@ -27,7 +27,7 @@ if (token) {
   } else {
     authenticated = true;
   }
-}
+} */
 
 class App extends Component {
   render() {
