@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import AppIcon from "../images/icon.png";
-import axios from "axios";
+
+/* Redux stuff */
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
 
 /* MUI stuff */
 import {
@@ -47,35 +50,23 @@ class login extends Component {
 		this.state = {
 			email: "",
 			password: "",
-			loading: false,
 			errors: {},
 		};
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.UI.errors) {
+			this.setState({ errors: nextProps.UI.errors });
+		}
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.setState({ loading: true });
-
 		const userData = {
 			email: this.state.email,
 			password: this.state.password,
 		};
-
-		axios
-			.post("/login", userData)
-			.then((res) => {
-				this.setState({
-					loading: false,
-				});
-				this.props.history.push("/");
-				console.log(res.data);
-			})
-			.catch((err) => {
-				this.setState({
-					loading: false,
-					errors: err.response.data,
-				});
-			});
+		this.props.loginUser(userData, this.props.history);
 	};
 
 	handleChange = (e) => {
@@ -84,10 +75,13 @@ class login extends Component {
 		});
 	};
 
-	state = {};
+	//state = {};
 	render() {
-		const { classes } = this.props;
-		const { errors, loading } = this.state;
+		const {
+			classes,
+			UI: { loading },
+		} = this.props;
+		const { errors } = this.state;
 
 		return (
 			<Grid container className={classes.form}>
@@ -98,7 +92,8 @@ class login extends Component {
 							display: "flex",
 							justifyContent: "space-evenly",
 							margin: "20px auto",
-						}}>
+						}}
+					>
 						<img src={AppIcon} alt="App Icon" className={classes.AppIcon} />
 						<Typography variant="h2" className={classes.pageTitle}>
 							Login
@@ -139,7 +134,8 @@ class login extends Component {
 							variant="contained"
 							color="primary"
 							className={classes.button}
-							disabled={loading}>
+							disabled={loading}
+						>
 							Login
 							{loading && (
 								<CircularProgress
@@ -167,6 +163,21 @@ class login extends Component {
 
 login.propTypes = {
 	classes: PropTypes.object.isRequired,
+	loginUser: PropTypes.func.isRequired,
+	user: PropTypes.object.isRequired,
+	UI: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(login);
+const mapStateToProps = (state) => ({
+	user: state.user,
+	UI: state.UI,
+});
+
+const mapActionToProps = {
+	loginUser,
+};
+
+export default connect(
+	mapStateToProps,
+	mapActionToProps
+)(withStyles(styles)(login));
